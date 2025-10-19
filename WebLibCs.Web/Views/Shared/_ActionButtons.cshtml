@@ -1,0 +1,41 @@
+@model WebLibCs.Web.ViewModels.ActionButtons.ActionButtonsViewModel
+
+@{
+    var controllerName = ViewContext.RouteData.Values["controller"]?.ToString() ?? Model.Controller;
+    var itemTitle = Model.ItemTitle ?? "elemento";
+}
+
+<div class="action-buttons d-inline-flex gap-1">
+    @if (Model.ShowEdit)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id" 
+           class="btn btn-sm btn-outline-secondary action-icon" 
+           title="Editar @itemTitle" 
+           aria-label="Editar @itemTitle">
+            <i class="bi bi-pencil-square"></i>
+            <span class="visually-hidden">Editar</span>
+        </a>
+    }
+    
+    @if (Model.ShowDetails)
+    {
+        <a asp-action="Details" asp-route-id="@Model.Id" 
+           class="btn btn-sm btn-outline-primary action-icon" 
+           title="Ver detalles de @itemTitle" 
+           aria-label="Ver detalles de @itemTitle">
+            <i class="bi bi-eye"></i>
+            <span class="visually-hidden">Detalles</span>
+        </a>
+    }
+    
+    @if (Model.ShowDelete)
+    {
+        <a asp-action="Delete" asp-route-id="@Model.Id" 
+           class="btn btn-sm btn-outline-danger action-icon" 
+           title="Eliminar @itemTitle" 
+           aria-label="Eliminar @itemTitle">
+            <i class="bi bi-trash"></i>
+            <span class="visually-hidden">Eliminar</span>
+        </a>
+    }
+</div>

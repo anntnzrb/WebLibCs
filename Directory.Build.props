@@ -1,0 +1,55 @@
+<Project>
+
+  <!-- Common properties for all projects -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+    <AnalysisLevel>8-all</AnalysisLevel>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Suppress warnings from DB-first scaffolded code and missing XML comments -->
+    <NoWarn>$(NoWarn);CS1030;CS1591;MA0051;CA1062;CA1304;CA1311;MA0011;CA1056;CA2213;CA2007;CA1861;MA0048;CA1848</NoWarn>
+    
+    <!-- Company/Author Info -->
+    <Authors>anntnzrb</Authors>
+    <Company>WebLibCs</Company>
+    <Product>WebLibCs Library Management System</Product>
+    <Copyright>Copyright © 2025 anntnzrb</Copyright>
+    
+    <!-- Version Info -->
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    
+    <!-- Build Configuration -->
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- Common packages for all projects (versions managed in Directory.Packages.props) -->
+  <ItemGroup>
+    <!-- Code Analyzers -->
+    <PackageReference Include="Meziantou.Analyzer" />
+    <PackageReference Include="Roslynator.Analyzers" />
+    
+    <!-- Entity Framework Core -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    
+    <!-- Common Annotations -->
+    <PackageReference Include="System.ComponentModel.Annotations" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" />
+    
+    <!-- AutoMapper -->
+    <PackageReference Include="AutoMapper" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+  </ItemGroup>
+  
+  <!-- Infrastructure-specific packages -->
+  <ItemGroup Condition="'$(MSBuildProjectName)' == 'WebLibCs.Infrastructure'">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+</Project>

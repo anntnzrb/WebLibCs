@@ -1,0 +1,62 @@
+@model WebLibCs.Web.ViewModels.Autor.AutorIndexViewModel
+
+@{
+    ViewData["Title"] = "Autores";
+}
+
+<h1>Autores</h1>
+
+<p>
+    <a asp-action="Create">Nuevo Autor</a>
+</p>
+
+<!-- Formulario de búsqueda -->
+<form asp-action="Index" method="get">
+    <div class="form-group">
+        <input type="text" name="searchString" value="@Model.SearchTerm" class="form-control" placeholder="Buscar autores por nombre..." />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2" title="Buscar" aria-label="Buscar">
+        <i class="bi bi-search"></i>
+        <span class="visually-hidden">Buscar</span>
+    </button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Imagen
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.AutoresList) {
+        <tr>
+            <td>
+                @if (!string.IsNullOrEmpty(item.ImagenRuta))
+                {
+                    <img src="@item.ImagenRuta" alt="Imagen de @item.Nombre" style="width:50px;height:auto;" class="img-thumbnail" />
+                }
+                else
+                {
+                    <span class="text-muted">Sin imagen</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                <partial name="_ActionButtons" model="new WebLibCs.Web.ViewModels.ActionButtons.ActionButtonsViewModel 
+                { 
+                    Id = item.Id, 
+                    ItemTitle = item.Nombre 
+                }" />
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,58 @@
+@model IEnumerable<WebLibCs.Core.DTOs.LibroDto>
+
+<section class="latest">
+    <div class="container">
+        <h2 class="text-center mb-5">Últimos Libros</h2>
+        <div class="row g-4">
+            @if (Model.Any())
+            {
+                @foreach (var book in Model)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card book-card h-100">
+                            @if (!string.IsNullOrEmpty(book.ImagenRuta))
+                            {
+                                <img src="@book.ImagenRuta" class="card-img-top" alt="@book.Titulo" loading="lazy" />
+                            }
+                            else
+                            {
+                                <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 200px;">
+                                    <i class="bi bi-book display-4 text-muted"></i>
+                                </div>
+                            }
+                            <div class="card-body">
+                                <h5 class="card-title">@book.Titulo</h5>
+                                <p class="card-text">
+                                    <i class="bi bi-person text-muted"></i> @book.AutorNombre
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        <i class="bi bi-calendar"></i> @book.AnioPublicacion
+                                    </small>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="/Libros/Details/@book.Id" 
+                                   class="btn btn-outline-primary action-icon" 
+                                   title="Ver detalles de @book.Titulo" 
+                                   aria-label="Ver detalles de @book.Titulo">
+                                    <i class="bi bi-eye"></i>
+                                    <span class="visually-hidden">Ver Detalles</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <p class="text-muted">No hay libros disponibles aún. <a href="/Libros/Create">¡Agrega tu primer libro!</a></p>
+                </div>
+            }
+        </div>
+        <div class="text-center mt-4">
+            <a href="/Libros" class="btn btn-primary">Ver Todos los Libros</a>
+        </div>
+    </div>
+</section>

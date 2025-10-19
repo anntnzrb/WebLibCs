@@ -1,0 +1,13 @@
+@model WebLibCs.Web.ViewModels.Home.HomeIndexViewModel
+@{
+    ViewData["Title"] = "WebLibCs - Inicio";
+}
+
+<!-- Hero Section -->
+<partial name="_Hero" />
+
+<!-- Features Section -->
+<partial name="_Features" />
+
+<!-- Latest Books Section -->
+<partial name="_LatestBooks" model="Model.LatestBooks" />

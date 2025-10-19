@@ -1,0 +1,41 @@
+@model WebLibCs.Web.ViewModels.Autor.DetailsAutorViewModel
+
+@{
+    ViewData["Title"] = "Detalles del Autor";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Autor</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        @if (!string.IsNullOrEmpty(Model.ImagenRuta))
+        {
+            <dt class = "col-sm-2">
+                Imagen
+            </dt>
+            <dd class = "col-sm-10">
+                <img src="@Model.ImagenRuta" alt="Imagen del autor" style="width:150px;height:auto;" class="img-thumbnail" />
+            </dd>
+        }
+    </dl>
+</div>
+<div class="d-flex gap-2 align-items-center">
+    <a asp-action="Edit" asp-route-id="@Model.Id" 
+       class="btn btn-outline-secondary action-icon" 
+       title="Editar @Model.Nombre" 
+       aria-label="Editar @Model.Nombre">
+        <i class="bi bi-pencil-square"></i>
+        <span class="visually-hidden">Editar</span>
+    </a>
+    <a asp-action="Index" class="btn btn-outline-primary">
+        <i class="bi bi-arrow-left me-1"></i>Volver a la Lista
+    </a>
+</div>
